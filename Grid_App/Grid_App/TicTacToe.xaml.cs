@@ -133,12 +133,18 @@ namespace Grid_App
                 
                 else if (checkWinnerY()==true)
                 {
-                    DisplayAlert("Yes", "no", "continue");
+                    DisplayAlert("Игра окончена", "Победил ", "Новая игра");
+                    Reset();
+                }
+                else if (checkWinnerX() == true)
+                {
+                    DisplayAlert("Игра окончена", "Победил ", "Новая игра");
+                    Reset();
                 }
 
 
 
-           }
+        }
         bool checkDraw() //Проверка на ничью
         {
             if(stps==9)
@@ -165,6 +171,18 @@ namespace Grid_App
             {
                 return true;
             }
+            if (tic[0, 0].Text == "0" && tic[1, 0].Text == "0" && tic[2, 0].Text == "0")
+            {
+                return true; ;
+            }
+            else if (tic[0, 1].Text == "0" && tic[1, 1].Text == "0" && tic[2, 1].Text == "0")
+            {
+                return true;
+            }
+            else if (tic[0, 2].Text == "0" && tic[1, 2].Text == "0" && tic[2, 2].Text == "0")
+            {
+                return true;
+            }
             else
             {
                 return false;
@@ -181,6 +199,18 @@ namespace Grid_App
                 return true;
             }
             else if (tic[2, 0].Text == "X" && tic[2, 1].Text == "X" && tic[2, 2].Text == "X")
+            {
+                return true;
+            }
+            if (tic[0, 0].Text == "0" && tic[0, 1].Text == "0" && tic[0, 2].Text == "0")
+            {
+                return true; ;
+            }
+            else if (tic[1, 1].Text == "0" && tic[1, 1].Text == "0" && tic[1, 2].Text == "0")
+            {
+                return true;
+            }
+            else if (tic[2, 0].Text == "0" && tic[2, 1].Text == "X" && tic[2, 2].Text == "0")
             {
                 return true;
             }
