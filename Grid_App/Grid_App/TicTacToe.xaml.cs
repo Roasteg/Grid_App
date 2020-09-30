@@ -16,12 +16,14 @@ namespace Grid_App
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class TicTacToe : ContentPage
     {
+        Label[,] tic = new Label[3, 3];
+        string l;
         public TicTacToe()
         {
             Reset();
+            stps = 0;
         }
             //InitializeComponent();
-            BoxView tic;
             Label stat;
             Button change, res;
 
@@ -54,6 +56,7 @@ namespace Grid_App
                     {
 
 
+
                         stat = new Label
                         {
                             BackgroundColor=Color.Green,
@@ -65,6 +68,8 @@ namespace Grid_App
 
 
                         };
+                    tic[i, j] = stat;
+                    l = "X";
                         var tap = new TapGestureRecognizer();
                         tap.Tapped += Tap_Tapped;
                         grid.Children.Add(stat, i, j);
@@ -85,9 +90,10 @@ namespace Grid_App
         {
             Reset();
             chck = 0;//Перезапуск игры
+            stps = 0;
         }
           
-        List<Label> lst = new List<Label>() { }; //сохраняем здесь поля
+
         private void Tap_Tapped(object sender, EventArgs e)
 
             {
@@ -99,28 +105,35 @@ namespace Grid_App
 
             if (stat.Text == "") //Проверка на наличие текста в поле
 
-
                 if (chck % 2 == 0)
                 {
                     change.Text = "0";
-                    stat.Text = "X";
+                    stat.Text = l;
                     chck++;
-                    lst.Add(stat);
+                    stps++;
+
+        
                 
                 }
                   else if (chck % 2 != 0)
                  {
                     change.Text = "X";
                     chck++;
+                    stps++;
                     stat.Text = "0";
-                    lst.Add(stat);
+              
                  }
 
                 if (checkDraw() == true)
                 {
                     DisplayAlert("Игра окончена", "Ничья", "Новая игра");
                     Reset();
-                    chck = 0;
+                    stps = 0;
+                }
+                
+                else if (checkWinnerY()==true)
+                {
+                    DisplayAlert("Yes", "no", "continue");
                 }
 
 
@@ -128,7 +141,7 @@ namespace Grid_App
            }
         bool checkDraw() //Проверка на ничью
         {
-            if(chck==9)
+            if(stps==9)
             {
                 return true;
             }
@@ -137,17 +150,61 @@ namespace Grid_App
                 return false;
             }
         }
-/*        bool checkWinner()
-        {
 
-        }*/
+        bool checkWinnerX() //Проверка на победителя по диагонали
+        { //по диагонале
+            if (tic[0, 0].Text == "X" && tic[1, 0].Text == "X" && tic[2, 0].Text == "X")
+            {
+                return true; ;
+            }
+            else if (tic[0, 1].Text == "X" && tic[1, 1].Text == "X" && tic[2, 1].Text == "X")
+            {
+                return true;
+            }
+            else if (tic[0, 2].Text == "X" && tic[1, 2].Text == "X" && tic[2, 2].Text == "X")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        bool checkWinnerY() //Проверка на победителя по вертикали
+        { //по диагонале
+            if (tic[0, 0].Text == "X" && tic[0, 1].Text == "X" && tic[0, 2].Text == "X")
+            {
+                return true; ;
+            }
+            else if (tic[1, 1].Text == "X" && tic[1, 1].Text == "X" && tic[1, 2].Text == "X")
+            {
+                return true;
+            }
+            else if (tic[2, 0].Text == "X" && tic[2, 1].Text == "X" && tic[2, 2].Text == "X")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        int stps = 0;
+
 
         Random strt = new Random();
         int chck = 0;
         private void Change_Clicked(object sender, EventArgs e) //Рандомайзер, кто будет ходить первый
         {
             chck = strt.Next(0, 2);
-
+            if (chck % 2 == 0)
+            {
+                change.Text = "X";
+            }
+            else if (chck%2 != 0)
+            {
+                change.Text = "0";
+            }
     
         }
 
