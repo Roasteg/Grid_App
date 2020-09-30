@@ -29,7 +29,8 @@ namespace Grid_App
 
             void Reset()
             {
-                Grid grid = new Grid();
+            stps = 0;
+            Grid grid = new Grid();
                 for (int g = 0; g < 3; g++)
                 {
 
@@ -133,15 +134,14 @@ namespace Grid_App
                 
                 else if (checkWinnerY()==true)
                 {
-                    DisplayAlert("Игра окончена", "Победил ", "Новая игра");
+                    DisplayAlert("Игра окончена", "", "Новая игра");
                     Reset();
                 }
                 else if (checkWinnerX() == true)
                 {
-                    DisplayAlert("Игра окончена", "Победил ", "Новая игра");
+                    DisplayAlert("Игра окончена", "", "Новая игра");
                     Reset();
                 }
-
 
 
         }
@@ -171,7 +171,7 @@ namespace Grid_App
             {
                 return true;
             }
-            if (tic[0, 0].Text == "0" && tic[1, 0].Text == "0" && tic[2, 0].Text == "0")
+            else if (tic[0, 0].Text == "0" && tic[1, 0].Text == "0" && tic[2, 0].Text == "0")
             {
                 return true; ;
             }
@@ -194,7 +194,7 @@ namespace Grid_App
             {
                 return true; ;
             }
-            else if (tic[1, 1].Text == "X" && tic[1, 1].Text == "X" && tic[1, 2].Text == "X")
+            else if (tic[1, 0].Text == "X" && tic[1, 1].Text == "X" && tic[1, 2].Text == "X")
             {
                 return true;
             }
@@ -202,11 +202,11 @@ namespace Grid_App
             {
                 return true;
             }
-            if (tic[0, 0].Text == "0" && tic[0, 1].Text == "0" && tic[0, 2].Text == "0")
+            else if (tic[0, 0].Text == "0" && tic[0, 1].Text == "0" && tic[0, 2].Text == "0")
             {
                 return true; ;
             }
-            else if (tic[1, 1].Text == "0" && tic[1, 1].Text == "0" && tic[1, 2].Text == "0")
+            else if (tic[1, 0].Text == "0" && tic[1, 1].Text == "0" && tic[1, 2].Text == "0")
             {
                 return true;
             }
