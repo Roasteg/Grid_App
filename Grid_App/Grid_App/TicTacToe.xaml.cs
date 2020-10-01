@@ -134,12 +134,17 @@ namespace Grid_App
                 
                 else if (checkWinnerY()==true)
                 {
-                    DisplayAlert("Игра окончена", "", "Новая игра");
+                    DisplayAlert("Игра окончена", wnr, "Новая игра");
                     Reset();
                 }
                 else if (checkWinnerX() == true)
                 {
-                    DisplayAlert("Игра окончена", "", "Новая игра");
+                    DisplayAlert("Игра окончена", wnr, "Новая игра");
+                    Reset();
+                }
+                else if (checkWinnerXY()==true)
+                {
+                    DisplayAlert("Игра окончена", wnr, "Новая игра");
                     Reset();
                 }
 
@@ -156,31 +161,37 @@ namespace Grid_App
                 return false;
             }
         }
-
+        string wnr = "";
         bool checkWinnerX() //Проверка на победителя по диагонали
         { //по диагонале
             if (tic[0, 0].Text == "X" && tic[1, 0].Text == "X" && tic[2, 0].Text == "X")
             {
+                wnr = "Выиграл X";
                 return true; ;
             }
             else if (tic[0, 1].Text == "X" && tic[1, 1].Text == "X" && tic[2, 1].Text == "X")
             {
+                wnr = "Выиграл X";
                 return true;
             }
             else if (tic[0, 2].Text == "X" && tic[1, 2].Text == "X" && tic[2, 2].Text == "X")
             {
+                wnr = "Выиграл X";
                 return true;
             }
             else if (tic[0, 0].Text == "0" && tic[1, 0].Text == "0" && tic[2, 0].Text == "0")
             {
+                wnr = "Выиграл 0";
                 return true; ;
             }
             else if (tic[0, 1].Text == "0" && tic[1, 1].Text == "0" && tic[2, 1].Text == "0")
             {
+                wnr = "Выиграл 0";
                 return true;
             }
             else if (tic[0, 2].Text == "0" && tic[1, 2].Text == "0" && tic[2, 2].Text == "0")
             {
+                wnr = "Выиграл 0";
                 return true;
             }
             else
@@ -189,29 +200,41 @@ namespace Grid_App
             }
         }
         bool checkWinnerY() //Проверка на победителя по вертикали
-        { //по диагонале
+        {  //по горизонтали 
+
             if (tic[0, 0].Text == "X" && tic[0, 1].Text == "X" && tic[0, 2].Text == "X")
             {
+                wnr = "Выиграл X";
                 return true; ;
             }
+         
             else if (tic[1, 0].Text == "X" && tic[1, 1].Text == "X" && tic[1, 2].Text == "X")
             {
+                wnr = "Выиграл X";
                 return true;
             }
+            
             else if (tic[2, 0].Text == "X" && tic[2, 1].Text == "X" && tic[2, 2].Text == "X")
             {
+                wnr = "Выиграл X";
                 return true;
             }
+           
             else if (tic[0, 0].Text == "0" && tic[0, 1].Text == "0" && tic[0, 2].Text == "0")
             {
+                wnr = "Выиграл 0";
                 return true; ;
             }
+            
             else if (tic[1, 0].Text == "0" && tic[1, 1].Text == "0" && tic[1, 2].Text == "0")
             {
+                wnr = "Выиграл 0";
                 return true;
             }
+           
             else if (tic[2, 0].Text == "0" && tic[2, 1].Text == "X" && tic[2, 2].Text == "0")
             {
+                wnr = "Выиграл 0";
                 return true;
             }
             else
@@ -219,7 +242,34 @@ namespace Grid_App
                 return false;
             }
         }
-        int stps = 0;
+        bool checkWinnerXY()
+        {
+            if (tic[0, 0].Text == "X" && tic[1, 1].Text == "X" && tic[2, 2].Text == "X")
+            {
+                wnr = "Выиграл X";
+                return true; ;
+            }
+            else if (tic[2, 0].Text == "X" && tic[1, 1].Text == "X" && tic[0, 2].Text == "X")
+            {
+                wnr = "Выиграл X";
+                return true;
+            }
+            else if (tic[0, 0].Text == "0" && tic[1, 1].Text == "0" && tic[2, 2].Text == "0")
+            {
+                wnr = "Выиграл 0";
+                return true; ;
+            }
+            else if (tic[2, 0].Text == "0" && tic[1, 1].Text == "0" && tic[0, 2].Text == "0")
+            {
+                wnr = "Выиграл 0";
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+            int stps = 0;
 
 
         Random strt = new Random();
