@@ -22,10 +22,11 @@ namespace Grid_App
         {
             Reset();
             stps = 0;
+            man.IsEnabled = true;
         }
             //InitializeComponent();
             Label stat;
-            Button change, res;
+            Button change, res, man;
 
             void Reset()
             {
@@ -50,6 +51,11 @@ namespace Grid_App
                     Text = "Reset game"
                 };
                 res.Clicked += Res_Clicked;
+                man = new Button
+                {
+                    Text = "Manual player selection"
+                };
+                man.Clicked += Man_Clicked;
 
                 for (int i = 0; i < 3; i++) //Генерация поля
                 {
@@ -83,10 +89,40 @@ namespace Grid_App
 
                 grid.Children.Add(change, 0, 3);
                 grid.Children.Add(res, 2,3);
+                grid.Children.Add(man, 1, 3);
                 Content = grid;
 
             }
-      
+        private async void Man_Clicked(object sender, EventArgs e)
+        {
+            string choice = await DisplayActionSheet("Кто начинает?", "Х", "0", "Выбирайте знак");
+            if (choice == "X")
+            {
+                chck = 2;
+                change.Text = "X";
+                man.IsEnabled = false;
+                
+            }
+            else if (choice == "0")
+            {
+                
+                chck = 1;
+                change.Text = "0";
+                man.IsEnabled = false;
+
+            }
+            else if(chck>=1)
+            {
+                man.IsEnabled = false;
+            }
+
+            else
+            {
+                man.IsEnabled = true;
+            }
+        }
+
+
         private void Res_Clicked(object sender, EventArgs e)
         {
             Reset();
