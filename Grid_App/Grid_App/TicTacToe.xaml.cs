@@ -43,7 +43,7 @@ namespace Grid_App
                 }
                 change = new Button
                 {
-                    Text = "Who's first?"
+                    Text = "Random player"
                 };
                 change.Clicked += Change_Clicked;
                 res = new Button
@@ -95,7 +95,8 @@ namespace Grid_App
             }
         private async void Man_Clicked(object sender, EventArgs e)
         {
-            string choice = await DisplayActionSheet("Кто начинает?", "Х", "0", "Выбирайте знак");
+            string choice = await DisplayActionSheet("Кто начинает?", "X", "0", "Выбирайте знак");
+
             if (choice == "X")
             {
                 chck = 2;
@@ -110,10 +111,6 @@ namespace Grid_App
                 change.Text = "0";
                 man.IsEnabled = false;
 
-            }
-            else if(chck>=1)
-            {
-                man.IsEnabled = false;
             }
 
             else
